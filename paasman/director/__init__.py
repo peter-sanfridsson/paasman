@@ -26,3 +26,4 @@ def edit_app(id):
 @app.route("/apps/<int:id>/", methods=("DELETE"))
 def delete_app(id):
     return ""
+    

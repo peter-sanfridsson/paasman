@@ -2,3 +2,4 @@ flask
 gevent
 pyzmq
 boto
+requests
