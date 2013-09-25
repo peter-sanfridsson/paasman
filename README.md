@@ -9,5 +9,8 @@ TBA.
 
 Architecture
 ------------
-TBA.
+The current design of the system is like follows.
 
+- We have one master vm that handle the director and router
+    and also maintains a private docker index/registry.
+- ... 
