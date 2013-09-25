@@ -3,3 +3,6 @@ gevent
 pyzmq
 boto
 requests
+redis
+sqlalchemy
+psycopg2

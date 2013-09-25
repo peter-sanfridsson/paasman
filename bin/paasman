@@ -1,4 +1,4 @@
 #! /usr/bin/env python
 
 if __name__ == "__main__":
-	print "Passman is not ready!"
+	print "Paasman is not ready!"

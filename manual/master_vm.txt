@@ -1,0 +1,25 @@
+Master VM
+=========
+
+The VM called master is responsible for hosting the router and director but also
+our private docker index/registry.
+
+How to setup the Docker registry
+--------------------------------
+
+
+
+x. Start the registry via systemd.
+
+http://coreos.com/docs/using-coreos/#process-management-with-systemd
+
+[Unit]
+Description=Docker registry
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker run samalba/docker-registry
+
+[Install]
+WantedBy=local.target

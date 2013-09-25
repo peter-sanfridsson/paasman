@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-    author: mikhln-9
+    authors
+    =======
+    mikhln-9
+    sanpet-8
 """
