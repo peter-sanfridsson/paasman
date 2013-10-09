@@ -23,3 +23,9 @@ ExecStart=/usr/bin/docker run samalba/docker-registry
 
 [Install]
 WantedBy=local.target
+
+####
+
+We need to setup a dockerfile => image that hosts and startup a node.js application
+that we can use for all deployed applications that we just move a file to the image fs
+on a specific location to automate the process.

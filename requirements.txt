@@ -5,4 +5,4 @@ boto
 requests
 redis
 sqlalchemy
-psycopg2
+#psycopg2 -- just use sqlite for this

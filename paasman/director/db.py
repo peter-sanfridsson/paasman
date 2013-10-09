@@ -12,11 +12,7 @@ from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine("postgresql+psycopg2://root:paasman123@10.10.10.2:5432/airsoftdb_dev_v2",
-    convert_unicode=True,
-    pool_size=8, # change to what?
-    max_overflow=0
-)
+engine = create_engine("sqlite:///dpaasman.db")
 
 metadata = MetaData()
 session = scoped_session(sessionmaker(autocommit=False,
@@ -26,3 +22,8 @@ session = scoped_session(sessionmaker(autocommit=False,
 
 Base = declarative_base(metadata=metadata)
 Base.query = session.query_property()
+
+if __name__ == "__main__":
+    from paasman.director.models import Application
+
+    Base.metadata.create_all(engine)

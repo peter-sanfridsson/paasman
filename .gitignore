@@ -35,3 +35,6 @@ nosetests.xml
 
 # Vagrant
 .vagrant/
+
+# deployments
+_deployments/*

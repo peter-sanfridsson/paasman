@@ -28,19 +28,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     dev.vm.synced_folder ".", "/vagrant/"
     dev.vm.network :private_network, :ip => "10.10.10.25"
 
-    dev.vm.provision :shell, :path => "bootstrap-dev.sh"
+    dev.vm.provision :shell, :path => "bootstraps/bootstrap-dev.sh"
+
+    dev.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
   end
 
   # coreos-master should be responsible for the router and director
   # and also hosting our private docker registry
   config.vm.define "coreos-master" do |coreos|
     coreos.vm.box = "coreos-72"
-    coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/72.0.0/coreos_production_vagrant.box"
+    coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/91.0.0/coreos_production_vagrant.box"
+    #coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
 
     coreos.vm.network :private_network, :ip => "10.10.10.2"
 
+    config.vm.network "forwarded_port", guest: 5000, host: 5100
+
     # TODO:
-    #dev.vm.provision :shell, :path => "bootstrap-master.sh"
+    coreos.vm.provision :shell, :path => "bootstraps/bootstrap-master.sh"
+
+    coreos.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "512"]
+    end
   end
 
   # coreos-n should be virtual machines in the cluster.
@@ -50,10 +61,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       coreos.vm.box = "coreos-72"
       coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/72.0.0/coreos_production_vagrant.box"
 
-      coreos.vm.network :private_network, :ip => "10.10.10.#{2+n}"
+      coreos.vm.network :private_network, :ip => "10.10.10.#{3+n}"
 
       # TODO:
-      #dev.vm.provision :shell, :path => "bootstrap-cluster.sh"
+      #coreos.vm.provision :shell, :path => "bootstrap-cluster.sh"
+
+      coreos.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "512"]
+      end
     end
   end
 

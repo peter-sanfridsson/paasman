@@ -9,6 +9,7 @@
 import os
 import sys
 import datetime
+from werkzeug import secure_filename
 
 class DirectorManager(object):
 	"""DirectorManager is responsible for handle the deployment of
@@ -19,7 +20,7 @@ class DirectorManager(object):
 		self.storage_path = storage_path
 
 	def store_application(self, name, blob):
-		self.storage_path
+		return self.storage_path
 
 	def _get_deploy_dir(self, name, blob):
 		release_name = datetime.datetime.utcnow().strftime("%Y%m%d%H%M")
