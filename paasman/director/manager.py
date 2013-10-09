@@ -20,6 +20,11 @@ class DirectorManager(object):
 		self.storage_path = storage_path
 
 	def store_application(self, name, blob):
+        # TODO: impl.
+        #   - create folder per app name (_deployments/)
+        #   - create a timestamped folder or similar, like 201309301130 + ev. random
+        #   - create a symlink for current -> 201309301130
+        # or: just save the file as the application-name.js instead without versioning
 		return self.storage_path
 
 	def _get_deploy_dir(self, name, blob):
