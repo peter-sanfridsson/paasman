@@ -18,7 +18,7 @@ class PaasmanClient(object):
         if endpoint.startswith("/"): endpoint = endpoint[1:]
         return self.uri + endpoint
 
-    def deploy(self, file, app, instances, processes):
+    def _deploy(self, file, app, instances, processes):
         """Deploy the application to the paasman system"""
         try:
             f = open(file)
@@ -55,7 +55,7 @@ class PaasmanClient(object):
         args = parser.parse_args()
         #print args
         if args.command == "push":
-            self.deploy(
+            self._deploy(
                 file=args.filename,
                 app=args.appname,
                 instances=args.instances,

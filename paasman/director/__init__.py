@@ -8,6 +8,7 @@
 
 from flask import Flask, request, jsonify
 from paasman.director.manager import DirectorManager
+from paasman.director import dispatcher
 
 app = Flask(__name__)
 
@@ -24,7 +25,9 @@ def api_error(message, status=400):
 
 @app.route("/apps/", methods=["GET"])
 def list_apps():
-    return ""
+    dispatcher.tasks.put_nowait("hello!")
+
+    return "added to queue"
 
 @app.route("/apps/", methods=["POST"])
 def deploy_app():
@@ -49,3 +52,8 @@ def edit_app(id):
 @app.route("/apps/<int:id>/", methods=["DELETE"])
 def delete_app(id):
     return ""
+
+@app.route("/apps/<name>/download/", methods=["GET"])
+def download_appfile(name):
+    # TODO: return the file for the asked app, used by a docker file that fetch the file to run
+    return "No file"

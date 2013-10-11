@@ -20,3 +20,5 @@ sudo apt-get update
 
 # Install, you will see another warning that the package cannot be authenticated. Confirm install.
 sudo apt-get install -y lxc-docker
+
+sudo apt-get install -y build-essential

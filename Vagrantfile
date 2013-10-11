@@ -38,9 +38,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # coreos-master should be responsible for the router and director
   # and also hosting our private docker registry
   config.vm.define "coreos-master" do |coreos|
-    coreos.vm.box = "coreos-72"
-    coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/91.0.0/coreos_production_vagrant.box"
-    #coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
+    coreos.vm.box = "coreos-72dev"
+    #coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/91.0.0/coreos_production_vagrant.box"
+    coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
 
     coreos.vm.network :private_network, :ip => "10.10.10.2"
 
