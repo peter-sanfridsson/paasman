@@ -1,10 +1,11 @@
 var http = require('http');
+//var process = require('process');
 var server = http.createServer(function (request, response) {
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.end("Hello World\n");
 });
 
-server.listen(8123);
+server.listen(process.argv[2] || 8123);
 
 //server.listen(8123);
 /*
