@@ -17,6 +17,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y libtool autoconf automa
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y libevent-dev
 
 # download the project and place it under paasman
-ADD https://github.com/ahlen/paasman/archive/master.tar.gz paasman
+ADD https://github.com/ahlen/paasman/archive/master.tar.gz paasman-src/
+RUN tar -xzvf /paasman-src/master.tar.gz --strip-components 1
 
 CMD ["/bin/bash"]
