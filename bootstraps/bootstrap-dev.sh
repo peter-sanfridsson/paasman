@@ -22,3 +22,5 @@ sudo apt-get update
 sudo apt-get install -y lxc-docker
 
 sudo apt-get install -y build-essential
+
+sudo apt-get install -y python-pip

@@ -16,3 +16,8 @@ class Application(Base):
     name = sa.Column(sa.String, index=True)
     status = sa.Column(sa.Enum("deployed", "undeployed", name="deployed_status"), nullable=False)
     # TODO: add auto-scaling, #processes, #instances etc
+
+class Node(base):
+    id = sa.Column(sa.Integer, primary_key=True)
+    name = sa.Column(sa.String, index=True)
+    internal_ip = sa.Column(sa.String, nullable=True) # or?

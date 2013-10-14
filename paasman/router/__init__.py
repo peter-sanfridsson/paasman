@@ -17,8 +17,8 @@ import requests
 #   or call the director for a list of urls and cache them in the process?
 apps = {
     "dev": [
-        ("http://10.10.10.25:8123"),
-        ("http://10.10.10.25:8124")
+        "http://10.10.10.25:8123",
+        "http://10.10.10.25:8124"
     ]
 }
 
