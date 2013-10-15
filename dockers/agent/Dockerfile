@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y libevent-dev
 RUN wget http://download.zeromq.org/zeromq-2.2.0.tar.gz
 RUN tar xzvf zeromq-2.2.0.tar.gz
 RUN cd zeromq-2.2.0 && ./configure
-RUN make && sudo make install
+RUN cd zeromq-2.2.0 && make && make install
 
 # download the project and place it under paasman
 ADD https://github.com/ahlen/paasman/archive/master.tar.gz paasman-src/
