@@ -42,7 +42,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     #coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/91.0.0/coreos_production_vagrant.box"
     coreos.vm.box_url = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
 
-    coreos.vm.network :private_network, :ip => "10.10.10.2"
+    #coreos.vm.network :private_network, :ip => "10.10.10.2"
 
     config.vm.network "forwarded_port", guest: 5000, host: 5100
 
