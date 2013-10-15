@@ -27,4 +27,11 @@ RUN cd paasman-src && tar -xzvf master.tar.gz --strip-components 1
 
 RUN cd paasman-src && pip install -r requirements.txt
 
+# 5555 for the publishing zeromq socket
+# 5111 for the server(rep) zeromq socket
+# 8001 for the directors RESTful API
+EXPOSE 5555 5111 8001
+
+ENTRYPOINT ["python", "paasman-src/wsgi-director.py"]
+
 CMD ["/bin/bash"]
