@@ -12,6 +12,7 @@ import urlparse
 import random
 from gevent import wsgi
 import requests
+import etcd
 
 # TODO: sync this list via gevent and zeromq or other pub/sub
 #   or call the director for a list of urls and cache them in the process?
@@ -34,12 +35,12 @@ def router(env, start_response):
     return ["Proxy only allows GET"]
 
 def proxy(env, start_response):
-    app = apps.get(get_appname(env.get("HTTP_HOST", None)), None)
+    app = get_appname(env.get("HTTP_HOST", None))
     if not app:
         start_response("404 Not Found", [("Content-Type", "text/html")])
         return ["App with name \"%s\" not found" % get_appname(env.get("HTTP_HOST", "?"))]
     # call one of the servers
-    destination = random.choice(app)
+    destination = app
 
     path = env.get("REQUEST_INFO", "/")
     headers = dict(((k, env[k]) for k in proxy_headers if env.has_key(k)))
@@ -53,13 +54,17 @@ def proxy(env, start_response):
     start_response("200 OK", response_headers)
     return [str(rep.text)]
     
-
+##etcd for ports
+##just one server for now
 def get_appname(hostname):
     """Parse the application name for the incoming.
     """
-    try:
-        return hostname.split(".")[0]
-    except:
-        return None
+    e=etcd.Etcd(host="172.17.42.1")
+    appname=hostname.split(".")[0]
+    listofinstances=[]
+    for x in e.list("app/"+appname+"/running"):
+        listofinstances.append(x.value)
+    port=random.choice(listofinstances)
+    return "http://172.17.42.1:"+port
 
-#wsgi.WSGIServer(("", 8000), router).serve_forever()
+#wsgi.WSGIServer(("", 80), router).serve_forever()
