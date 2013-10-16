@@ -18,10 +18,10 @@ etcd_client = etcd.Etcd("172.17.42.1", follow_leader=False)
 
 zmq_ctx = zmq.Context()
 subscriber = zmq_ctx.socket(zmq.SUB)
-subscriber.connect("tcp://172.17.42.1:5555") # TODO: 172.17.42.1 on a single node, change when clustering
+subscriber.connect("tcp://172.17.42.1:5555") # TODO: 172.17.42.1 on a single node, change when clustering to read key in etcd
 
 teller = zmq_ctx.socket(zmq.REQ)
-teller.connect("tcp://172.17.42.1:5111") # 172.17.42.1 on a single node, change when clustering
+teller.connect("tcp://172.17.42.1:5111") # 172.17.42.1 on a single node, change when clustering to to read key in etcd
 
 try:
     # Try to fetch the directors publish address (in pub/sub)

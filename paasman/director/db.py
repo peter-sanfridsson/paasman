@@ -8,6 +8,8 @@
 
 # TODO: or use redis for all persistence instead?
 
+from contextlib import contextmanager
+
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,7 +25,12 @@ session = scoped_session(sessionmaker(autocommit=False,
 Base = declarative_base(metadata=metadata)
 Base.query = session.query_property()
 
-if __name__ == "__main__":
-    from paasman.director.models import Application
-
-    Base.metadata.create_all(engine)
+@contextmanager
+def session_scope():
+    try:
+        yield session
+    except:
+        session.rollback()
+        raise
+    finally:
+        session.remove()

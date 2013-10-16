@@ -11,13 +11,15 @@
 import sqlalchemy as sa
 from paasman.director.db import Base
 
-class Application(Base):
+class Application(object): # change to Base
     id = sa.Column(sa.Integer, primary_key=True)
     name = sa.Column(sa.String, index=True)
     status = sa.Column(sa.Enum("deployed", "undeployed", name="deployed_status"), nullable=False)
     # TODO: add auto-scaling, #processes, #instances etc
 
-class Node(base):
+class Node(Base):
+    __tablename__ = "nodes"
+
     id = sa.Column(sa.Integer, primary_key=True)
-    name = sa.Column(sa.String, index=True)
-    internal_ip = sa.Column(sa.String, nullable=True) # or?
+    name = sa.Column(sa.String, unique=True)
+    private_ip = sa.Column(sa.String, nullable=False, unique=True) # or?

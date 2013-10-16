@@ -1,5 +1,7 @@
 *.py[cod]
 
+local_config.py
+
 # C extensions
 *.so
 
@@ -38,3 +40,6 @@ nosetests.xml
 
 # deployments
 _deployments/*
+
+# db
+dpaasman.db

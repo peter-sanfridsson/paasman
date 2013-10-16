@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 # TODO: move the filepath to director.cfg
 import os
-manager = DirectorManager("_deployments/")
+director_manager = DirectorManager("_deployments/")
 
 def api_error(message, status=400):
     return jsonify(
